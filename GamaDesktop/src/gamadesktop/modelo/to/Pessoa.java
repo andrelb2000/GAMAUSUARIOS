@@ -16,10 +16,10 @@ public abstract class Pessoa {
     
     protected String nomePessoa;
     protected String cpfPessoa;
-    protected Date   dataNascimento;
+    protected String dataNascimento;
     protected String sexoPessoa;
 
-    public Pessoa(String nomePessoa, String cpfPessoa, Date dataNascimento, String sexoPessoa) {
+    public Pessoa(String nomePessoa, String cpfPessoa, String dataNascimento, String sexoPessoa) {
         this.nomePessoa = nomePessoa;
         this.cpfPessoa = cpfPessoa;
         this.dataNascimento = dataNascimento;
@@ -34,7 +34,7 @@ public abstract class Pessoa {
         return cpfPessoa;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 

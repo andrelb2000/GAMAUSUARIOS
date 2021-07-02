@@ -10,6 +10,7 @@ import gamadesktop.modelo.to.*;
 import gamadesktop.modelo.dao.CargoDAO;
 import gamadesktop.modelo.dao.PerfilDAO;
 import gamadesktop.modelo.dao.UsuarioDAO;
+import gamadesktop.modelo.dao.UsuarioPerfilDAO;
 import java.util.ArrayList;
 
 /*
@@ -17,9 +18,11 @@ import java.util.ArrayList;
  */
 public class GamaControler {
     private static final Depurador dep = Depurador.getDepurador();
-    private CargoDAO   cargoDAO;
-    private PerfilDAO  perfilDAO;
-    private UsuarioDAO usuarioDAO;
+    private CargoDAO         cargoDAO;
+    private PerfilDAO        perfilDAO;
+    private UsuarioDAO       usuarioDAO;
+    private UsuarioPerfilDAO usuarioPerfilDAO;
+    
     
     public void inserirCargo(Cargo c){
         cargoDAO.insereCargo(c);        
@@ -29,6 +32,8 @@ public class GamaControler {
     }
     public void inserirUsuario(Usuario u){
         perfilDAO.insereListaPerfis(u.getPerfisUauario());
+        usuarioPerfilDAO.removeListaPerfisAssociados(u);
+        usuarioPerfilDAO.insereListaPerfisUsuario(u);
         cargoDAO.insereCargo(u.getCargoUsuario());
         usuarioDAO.insereUsuario(u);
     }
@@ -39,16 +44,19 @@ public class GamaControler {
         perfilDAO.removePerfil(p);
     }
     public void removerUsuario(Usuario u){
+        usuarioPerfilDAO.removeListaPerfisAssociados(u);
         usuarioDAO.removeUsuario(u);
-        //TODO verificar cargos e perfis nao usados e remover
+        perfilDAO.removePerfisSemUsuarios();
+        cargoDAO.removeCargoSemUsuarios();
     }
     public void alterarCargo(Cargo c){
-        
+        dep.log("Controlador alterando cargo");
     }
     public void alterarPerfil(Perfil p){
-        
+        dep.log("Controlador alterando perfil");
     }
     public void alterarUsuario(Usuario u){
+        dep.log("Controlador alterando o Usuário");
 
     }
     
@@ -79,23 +87,12 @@ public class GamaControler {
     public GamaControler() {
            dep.log("Controlador sendo criado");
            dep.log("Criando os DAOs");
-           cargoDAO     = new CargoDAO() ;
-           perfilDAO    = new PerfilDAO();
-           usuarioDAO   = new UsuarioDAO();
+           cargoDAO          = new CargoDAO() ;
+           perfilDAO         = new PerfilDAO();
+           usuarioDAO        = new UsuarioDAO();
+           usuarioPerfilDAO  = new UsuarioPerfilDAO();
            dep.log("Criando os DAOs - Observe se houve erros de conexao");
     }
-    
-    public void executar(){
-        try{
-            dep.log("Sistema inicializando");
-            
-            
-            
-            dep.log("Fim Execucao");
-        }catch(Exception e){
-            dep.log("Erro de inicialização da aplicação: "+e);
-        }
-        
-    }
+
     
 }

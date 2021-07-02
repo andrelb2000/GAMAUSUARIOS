@@ -14,14 +14,23 @@ import java.util.Date;
  */
 public class Usuario extends Pessoa{
     private Cargo cargoUsuario = null;
+    private Date  cadastroUsuario = new Date(2000, 1, 1);
     private ArrayList<Perfil> perfilUauario = null;
 
     public Usuario(String nomePessoa, String cpfPessoa, 
-                    Date dataNascimento, String sexoPessoa,
+                    String dataNascimento, String sexoPessoa,
                     Cargo cargo) {
         super(nomePessoa, cpfPessoa, dataNascimento, sexoPessoa);
         cargoUsuario = cargo;
         perfilUauario = new ArrayList<Perfil>();
+    }
+    public Usuario(String nomePessoa, String cpfPessoa, 
+                    String dataNascimento, String sexoPessoa,
+                    Cargo cargo,Date cad) {
+        super(nomePessoa, cpfPessoa, dataNascimento, sexoPessoa);
+        cargoUsuario = cargo;
+        perfilUauario = new ArrayList<Perfil>();
+        cadastroUsuario = cad;
     }
     public void addPerfil(Perfil p){
         perfilUauario.add(p);
@@ -33,6 +42,18 @@ public class Usuario extends Pessoa{
 
     public ArrayList<Perfil> getPerfisUauario() {
         return perfilUauario;
+    }
+
+    @Override
+    public String toString() {
+        
+        
+        return (nomePessoa + " | " 
+             + cpfPessoa + " | "
+             + dataNascimento +" | "
+             + sexoPessoa + " | "  
+             + cargoUsuario + " | "  
+             + cadastroUsuario   ) ;
     }
     
 }

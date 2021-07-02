@@ -6,16 +6,20 @@
 package gamadesktop.backconnector;
 import gamadesktop.Depurador;
 import gamadesktop.controler.GamaControler;
+import gamadesktop.view.ViewPrincipal;
 
 /**
  *
  * @author andre
  */
 public class ControlerListener {
-    protected GamaControler gamaControler = null;
     protected static final Depurador dep = Depurador.getDepurador();
+    protected GamaControler gamaControler = null;
+    protected ViewPrincipal gamaView = null;
 
-    public ControlerListener(GamaControler g) {
+
+    public ControlerListener(GamaControler g,ViewPrincipal v) {
         gamaControler = g;
+        gamaView = v;
     } 
 }

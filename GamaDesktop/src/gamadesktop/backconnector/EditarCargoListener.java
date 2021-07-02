@@ -7,23 +7,26 @@ package gamadesktop.backconnector;
 
 import gamadesktop.controler.GamaControler;
 import gamadesktop.view.CargoJFrame;
+import gamadesktop.view.ViewPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import gamadesktop.modelo.to.Cargo;
 /**
  *
  * @author andre
  */
 public class EditarCargoListener extends ControlerListener implements ActionListener{
-    private CargoJFrame   cargoView; 
-    public EditarCargoListener(GamaControler g,CargoJFrame cjf) {
-        super(g);
-        cargoView = cjf;
+
+    public EditarCargoListener(GamaControler g,ViewPrincipal v) {
+        super(g,v);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         dep.log("Conector swing editar cargo listener disparado");
+        Cargo c = gamaView.obterCargoDigitado();
+        gamaControler.alterarCargo(c);
     }
     
 }

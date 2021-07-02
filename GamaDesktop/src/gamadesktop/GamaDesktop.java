@@ -7,6 +7,7 @@ package gamadesktop;
 
 import gamadesktop.controler.GamaControler;
 import gamadesktop.backconnector.GamaDesktopBackConnector;
+import gamadesktop.view.ViewPrincipal;
 
 /**
  *
@@ -19,8 +20,9 @@ public class GamaDesktop {
      */
     public static void main(String[] args) {
         // Ponto de entrada de sistema para módulo controlador
-       GamaControler gama = new GamaControler();
-       GamaDesktopBackConnector gdbc = new GamaDesktopBackConnector(gama);
+       GamaControler gamaControler   = new GamaControler();
+       ViewPrincipal gamaView        = new ViewPrincipal();
+       GamaDesktopBackConnector gdbc = new GamaDesktopBackConnector(gamaControler,gamaView);
        gdbc.executar();
     }
     

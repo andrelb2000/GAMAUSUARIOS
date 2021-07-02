@@ -11,14 +11,24 @@ package gamadesktop.modelo.to;
  */
 public class Cargo {
     private String nomeCargo;
+    private double salarioCargo;
 
     public Cargo(String nomeCargo) {
         this.nomeCargo = nomeCargo;
     }
-
+    public Cargo(String nomeCargo,double s) {
+        this.nomeCargo = nomeCargo;
+        this.salarioCargo = s;
+    }
     public String getNomeCargo() {
         return nomeCargo;
     }
+
+    @Override
+    public String toString() {
+        return nomeCargo;
+    }
+    
     
     
 }

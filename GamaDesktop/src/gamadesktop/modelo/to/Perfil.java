@@ -11,13 +11,23 @@ package gamadesktop.modelo.to;
  */
 public class Perfil {
     private String nomePerfil;
+    private int nivelPerfil;
 
     public Perfil(String nomePerfil) {
         this.nomePerfil = nomePerfil;
     }
-
+    public Perfil(String nomePerfil,int n) {
+        this.nomePerfil = nomePerfil;
+        nivelPerfil = n;
+    }
+    
     public String getNomePerfil() {
         return nomePerfil;
+    }
+
+    @Override
+    public String toString() {
+        return nomePerfil ;
     }
     
     

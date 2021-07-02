@@ -10,51 +10,46 @@ import gamadesktop.controler.GamaControler;
 import gamadesktop.view.CargoJFrame;
 import gamadesktop.view.PerfilJFrame;
 import gamadesktop.view.UsuarioJFrame;
+import gamadesktop.view.ViewPrincipal;
 /**
  *
  * @author andre
  */
-public class GamaDesktopBackConnector {
-    private GamaControler gamaControler = null;
-    private static final Depurador dep = Depurador.getDepurador();
-    private CargoJFrame   cargoView;
-    private PerfilJFrame  perfilView;    
-    private UsuarioJFrame usuarioView;
+public class GamaDesktopBackConnector extends GamaBackConnector {
 
+    private ViewPrincipal gamaView = null;
 
-    public GamaDesktopBackConnector(GamaControler g) {
+    public GamaDesktopBackConnector(GamaControler g,ViewPrincipal v) {
+        super(g);
         dep.log("Conector de interface entre a view e o controlador sendo criado");
-        gamaControler = g;
-        cargoView   = new CargoJFrame();
-        perfilView  = new PerfilJFrame();    
-        usuarioView = new UsuarioJFrame();
-        dep.log("Views criadas ainda nao abertas");
+        gamaView = v;
     } 
     public void executar(){
-        //TODO Criar Listeners, Iniciar view principal e disparar Views
+        // Criar Listeners, Iniciar view principal e disparar Views
         dep.log("Criando todos os Listeners");
         /// Listeners da view de cadastro de usuarios
-        InsereUsuarioListener     iul  = new InsereUsuarioListener(gamaControler,usuarioView);
-               
+        InsereUsuarioListener       iul  = new InsereUsuarioListener(gamaControler,gamaView);
+        AbrirEditarCargoListener   aecl  = new AbrirEditarCargoListener(gamaControler,gamaView);
+        AbrirEditarPerfilListener   aepl = new AbrirEditarPerfilListener(gamaControler,gamaView);
+        RecuperaUsuariosListener    rul  = new RecuperaUsuariosListener(gamaControler,gamaView);  
+        RemoveUsuarioListener       rmul = new RemoveUsuarioListener(gamaControler,gamaView);
+        InserePerfilUsuarioListener ipul = new InserePerfilUsuarioListener(gamaControler,gamaView);
+        gamaView.adicionaListenersUsuario(iul,aecl,aepl,rul,rmul,ipul);    
         /// Listeners da view de Cargos
-        AbrirEditarCargoListener aecl  = new AbrirEditarCargoListener(gamaControler,cargoView);
-        InsereCargoListener      icl   = new InsereCargoListener(gamaControler,cargoView);
-        EditarCargoListener      ecl   = new EditarCargoListener(gamaControler,cargoView);
-        RemoveCargoListener      rcl   = new RemoveCargoListener(gamaControler,cargoView);
-        
+        InsereCargoListener      icl   = new InsereCargoListener(gamaControler,gamaView);
+        EditarCargoListener      ecl   = new EditarCargoListener(gamaControler,gamaView);
+        RemoveCargoListener      rcl   = new RemoveCargoListener(gamaControler,gamaView);
+        RecuperaCargosListener   rcsl  = new RecuperaCargosListener(gamaControler,gamaView);
+        gamaView.adicionaCargoListeners(icl,ecl,rcl,rcsl);
         /// Listeners da view de Perfis
-        AbrirEditarPerfilListener aepl = new AbrirEditarPerfilListener(gamaControler,perfilView);
-        InserePerfilListener    ipl    = new InserePerfilListener(gamaControler,perfilView);
-        EditarPerfilListener    epl    = new EditarPerfilListener(gamaControler,perfilView);
-        RemovePerfilListener    rpl    = new RemovePerfilListener(gamaControler,perfilView);
-       
+        InserePerfilListener    ipl    = new InserePerfilListener(gamaControler,gamaView);
+        EditarPerfilListener    epl    = new EditarPerfilListener(gamaControler,gamaView);
+        RemovePerfilListener    rpl    = new RemovePerfilListener(gamaControler,gamaView);
+        gamaView.adicionaPerfilListeners(ipl,epl,rpl);
+              
         dep.log("disparando view principal de cadastro");
-        
-        
-        
-        
-        
-        
+        gamaView.inicializar();
+       
     }
     
     

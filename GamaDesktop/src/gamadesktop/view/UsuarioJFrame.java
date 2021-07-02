@@ -8,9 +8,12 @@ import gamadesktop.Depurador;
 import gamadesktop.modelo.to.Cargo;
 import gamadesktop.modelo.to.Perfil;
 import gamadesktop.modelo.to.Usuario;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Date;
+import javax.swing.DefaultListModel;
 
 
 /**
@@ -19,6 +22,9 @@ import java.util.Date;
  */
 public class UsuarioJFrame extends javax.swing.JFrame {
     private static final Depurador dep = Depurador.getDepurador();
+    private DefaultListModel<Usuario> listaUsuarios = new DefaultListModel<Usuario>();
+    private DefaultListModel<Perfil> listaPerfisUsuarios = new DefaultListModel<Perfil>();
+    
     /**
      * Creates new form UsuarioJFrame
      */
@@ -39,28 +45,30 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        nomejTextField1 = new javax.swing.JTextField();
+        cpfjTextField2 = new javax.swing.JTextField();
+        dataNasjTextField3 = new javax.swing.JTextField();
+        generojTextField4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jTextField5 = new javax.swing.JTextField();
+        usuariosjList1 = new javax.swing.JList<Usuario>();
+        cargojTextField5 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        perfisjList2 = new javax.swing.JList<Perfil>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        perfiljTextField6 = new javax.swing.JTextField();
+        inserejButton1 = new javax.swing.JButton();
+        removerjButton2 = new javax.swing.JButton();
+        abrirEditarCargosjButton3 = new javax.swing.JButton();
+        abrirEditarPerfisjButton4 = new javax.swing.JButton();
+        alterarjButton5 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        inserePerfiljButton6 = new javax.swing.JButton();
+        recuperarUsuariosjButton7 = new javax.swing.JButton();
+        buscarjButton8 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        DataCadastrojLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,23 +84,25 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Sexo:");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nomejTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField2.setText("  ");
+        cpfjTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cpfjTextField2.setText("  ");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        dataNasjTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField4.setText("X");
+        generojTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        generojTextField4.setText("X");
 
-        jList1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        usuariosjList1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        usuariosjList1.setModel(listaUsuarios);
+        jScrollPane1.setViewportView(usuariosjList1);
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cargojTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jList2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jScrollPane2.setViewportView(jList2);
+        perfisjList2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        perfisjList2.setModel(listaPerfisUsuarios);
+        jScrollPane2.setViewportView(perfisjList2);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Usuários");
@@ -103,34 +113,41 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Cargo:");
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        perfiljTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Insere");
+        inserejButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        inserejButton1.setText("Insere");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Remover");
+        removerjButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        removerjButton2.setText("Remover");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Editar Cargos");
+        abrirEditarCargosjButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        abrirEditarCargosjButton3.setText("Editar Cargos");
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setText("Editar Perfis");
+        abrirEditarPerfisjButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        abrirEditarPerfisjButton4.setText("Editar Perfis");
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton5.setText("Alterar");
+        alterarjButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        alterarjButton5.setText("Alterar");
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel9.setText("Cadastro de Usuários");
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton6.setText("Acrescenta Perfil");
+        inserePerfiljButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        inserePerfiljButton6.setText("Acrescenta Perfil");
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton7.setText("Recuperar Todos");
+        recuperarUsuariosjButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        recuperarUsuariosjButton7.setText("Recuperar Todos");
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton8.setText("Buscar");
+        buscarjButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buscarjButton8.setText("Buscar");
+        buscarjButton8.setEnabled(false);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Data Cadastro:");
+
+        DataCadastrojLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        DataCadastrojLabel10.setText("_____________");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,120 +155,128 @@ public class UsuarioJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(jLabel9))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(inserejButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(removerjButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
+                        .addComponent(alterarjButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8))
+                        .addComponent(buscarjButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(inserePerfiljButton6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(perfiljTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)))
+                                .addComponent(dataNasjTextField3))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(generojTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField5)))
+                                .addComponent(cargojTextField5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DataCadastrojLabel10)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(nomejTextField1)
+                                        .addComponent(cpfjTextField2)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(abrirEditarCargosjButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(abrirEditarPerfisjButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addGap(59, 59, 59)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(recuperarUsuariosjButton7)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                                .addGap(30, 30, 30))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(DataCadastrojLabel10))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nomejTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(cpfjTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(dataNasjTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(generojTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton3)))
+                                .addComponent(cargojTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(abrirEditarCargosjButton3)))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4)))
+                            .addComponent(inserePerfiljButton6)
+                            .addComponent(perfiljTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(abrirEditarPerfisjButton4))
+                        .addGap(40, 40, 40))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5)
-                    .addComponent(jButton8)
-                    .addComponent(jButton7))
-                .addGap(33, 33, 33))
+                    .addComponent(inserejButton1)
+                    .addComponent(removerjButton2)
+                    .addComponent(alterarjButton5)
+                    .addComponent(buscarjButton8)
+                    .addComponent(recuperarUsuariosjButton7))
+                .addContainerGap())
         );
 
         pack();
@@ -261,16 +286,59 @@ public class UsuarioJFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-   public void colocaUsuario(Usuario c){
-       dep.log("Colcoa Usuario "+c+ " no painel");     
+   public void colocaUsuario(Usuario u){
+       dep.log("Colcoa Usuario "+u+ " no painel");   
+       nomejTextField1.setText(u.getNomePessoa());
+       cpfjTextField2.setText(u.getCpfPessoa());
+       dataNasjTextField3.setText(u.getDataNascimento().toString());
+       generojTextField4.setText(u.getSexoPessoa());
+       cargojTextField5.setText(u.getCargoUsuario().getNomeCargo());
    }
-   public void insereUsuarioLista(Usuario c){
-       dep.log("Insere Usuario "+c+ " na lista do painel");    
+   public void insereNovoUsuarioLista(Usuario u){
+       dep.log("Insere Novo Usuario "+u+ " na lista do painel"); 
+       listaUsuarios.addElement(u);
+       listaPerfisUsuarios.clear();
+       int i=0;
+       Iterator<Perfil> it = u.getPerfisUauario().iterator();
+       while(it.hasNext()){
+           Perfil p = (Perfil) it.next();
+           listaPerfisUsuarios.addElement(p);
+           dep.log("Adicionando perfil "+ i++ + "do Usuario "+u+ " na lista do painel"); 
+       }    
    }
+   
+   public void insereUsuarioLista(Usuario u){
+       dep.log("Insere Usuario "+u+ " na lista do painel"); 
+       listaUsuarios.addElement(u);    
+   }
+   public void limpaListaUsuarios(){
+       listaUsuarios.clear();
+       listaPerfisUsuarios.clear();
+   }
+   
+   
+   
+   
    public Usuario obterUsuarioDigitado(){
-       Usuario c = new Usuario("Nome","CPF",new Date(),"M",new Cargo("teste"));
-       dep.log("Obtem Usuario "+c+ " digitado no painel");
-       return c;
+       
+       String nome   = nomejTextField1.getText();
+       String cpf    = cpfjTextField2.getText();
+       String data   = dataNasjTextField3.getText();
+       String gen    = generojTextField4.getText();
+       String cargo  = cargojTextField5.getText();
+       String perfil = perfiljTextField6.getText();
+      
+       Usuario u = new Usuario(nome,cpf,data,gen,new Cargo(cargo));
+       
+       for(int i=0; i < listaPerfisUsuarios.getSize(); i++){
+           Perfil p = listaPerfisUsuarios.elementAt(i);
+           u.addPerfil(p);
+       }       
+       dep.log("Obtem Usuario "+u+ " digitado no painel");
+       return u;
+   }
+   public void insereListaPerfisUsuario(Perfil p){
+       listaPerfisUsuarios.addElement(p);      
    }
    public void insereListaCargos(ArrayList<Cargo> lista){
        dep.log("Inserindo lista de possiveis cargos");
@@ -278,16 +346,50 @@ public class UsuarioJFrame extends javax.swing.JFrame {
    public void insereListaPerfis(ArrayList<Perfil> lista){
        dep.log("Insere lista de possiveis perfis");
    }
+   public Perfil obterPerfilASerInseridoUsuario(){
+       dep.log("Colocando novo perfil para usuario ");
+       return (new Perfil(perfiljTextField6.getText()));
+   }
+   
+   public void adicionaInsereUsuarioListener(ActionListener l){
+       inserejButton1.addActionListener(l);
+   }
+   public void adicionaRemoveUsuariolListener(ActionListener l){
+       removerjButton2.addActionListener(l);
+   }
+   public void adicionaRecuperaUsuariosListener(ActionListener l){
+       recuperarUsuariosjButton7.addActionListener(l);
+   }
+   public void adiicionaInserePerfilUsuarioListener(ActionListener l){
+       inserePerfiljButton6.addActionListener(l);
+   }
+   
+   
+   public void adicionaEditarUsuarioListener(ActionListener l){
+       alterarjButton5.addActionListener(l);
+   }
+   public void adicionaAbreEditarCargoListener(ActionListener l){
+       abrirEditarCargosjButton3.addActionListener(l);
+   }
+   public void adicionaAbreEditarPerfilListener(ActionListener l){
+       abrirEditarPerfisjButton4.addActionListener(l);
+   }
+   
+   
+   
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JLabel DataCadastrojLabel10;
+    private javax.swing.JButton abrirEditarCargosjButton3;
+    private javax.swing.JButton abrirEditarPerfisjButton4;
+    private javax.swing.JButton alterarjButton5;
+    private javax.swing.JButton buscarjButton8;
+    private javax.swing.JTextField cargojTextField5;
+    private javax.swing.JTextField cpfjTextField2;
+    private javax.swing.JTextField dataNasjTextField3;
+    private javax.swing.JTextField generojTextField4;
+    private javax.swing.JButton inserePerfiljButton6;
+    private javax.swing.JButton inserejButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -295,16 +397,15 @@ public class UsuarioJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField nomejTextField1;
+    private javax.swing.JTextField perfiljTextField6;
+    private javax.swing.JList<Perfil> perfisjList2;
+    private javax.swing.JButton recuperarUsuariosjButton7;
+    private javax.swing.JButton removerjButton2;
+    private javax.swing.JList<Usuario> usuariosjList1;
     // End of variables declaration//GEN-END:variables
 }

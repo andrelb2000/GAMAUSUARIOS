@@ -6,6 +6,7 @@
 package gamadesktop.view;
 import gamadesktop.Depurador;
 import gamadesktop.modelo.to.Perfil;
+import java.awt.event.ActionListener;
 /**
  *
  * @author andre
@@ -28,34 +29,139 @@ public class PerfilJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        perfiljTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        inserejButton1 = new javax.swing.JButton();
+        removejButton2 = new javax.swing.JButton();
+        recuperajButton3 = new javax.swing.JButton();
+        editarjButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        perfisjList1 = new javax.swing.JList<>();
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Perfil");
+
+        perfiljTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setText("Cadastro de Perfis");
+
+        inserejButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        inserejButton1.setText("Insere Novo Perfil");
+
+        removejButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        removejButton2.setText("Remove Perfil");
+
+        recuperajButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        recuperajButton3.setText("Recupera Perfis");
+
+        editarjButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        editarjButton4.setText("Edita Perfis");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Lista de Perfis");
+
+        jScrollPane1.setViewportView(perfisjList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editarjButton4)
+                            .addComponent(inserejButton1)
+                            .addComponent(removejButton2)
+                            .addComponent(recuperajButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(perfiljTextField1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(53, 53, 53))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(103, 103, 103))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(perfiljTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(inserejButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removejButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(recuperajButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(editarjButton4)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   public void colocaPerfil(Perfil c){
-       dep.log("Colcoa Perfil "+c+ " no painel");     
+   public void colocaPerfil(Perfil p){
+       dep.log("Colcoa Perfil "+p+ " no painel");  
+       perfiljTextField1.setText(p.getNomePerfil());
    }
    public void inserePerfilLista(Perfil c){
        dep.log("Insere Perfil "+c+ " na lista do painel");    
    }
    public Perfil obterPerfilDigitado(){
-       Perfil c = new Perfil("Perfil TESTE");
-       dep.log("Obtem cargo "+c+ " digitado no painel");
-       return c;
+       String perfil = perfiljTextField1.getText();
+       Perfil p = new Perfil(perfil);
+       dep.log("Obtem perfil "+p+ " digitado no painel");
+       return p;
+   }
+   public void adicionaInserePerfilListener(ActionListener l){
+       inserejButton1.addActionListener(l);
+   }
+   public void adicionaRemovePerfilListener(ActionListener l){
+       removejButton2.addActionListener(l);
+   }
+   public void adicionaEditarPerfilListener(ActionListener l){
+       editarjButton4.addActionListener(l);
+   }
+   public void acidionaRecupararPerfisListener(ActionListener l){
+       recuperajButton3.addActionListener(l);
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editarjButton4;
+    private javax.swing.JButton inserejButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField perfiljTextField1;
+    private javax.swing.JList<String> perfisjList1;
+    private javax.swing.JButton recuperajButton3;
+    private javax.swing.JButton removejButton2;
     // End of variables declaration//GEN-END:variables
 }
