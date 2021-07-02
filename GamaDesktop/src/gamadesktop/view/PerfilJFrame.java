@@ -7,12 +7,14 @@ package gamadesktop.view;
 import gamadesktop.Depurador;
 import gamadesktop.modelo.to.Perfil;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author andre
  */
 public class PerfilJFrame extends javax.swing.JFrame {
     private static final Depurador dep = Depurador.getDepurador();
+    private DefaultListModel<Perfil> lista = new DefaultListModel<Perfil>();
     /**
      * Creates new form PerfilJFrame
      */
@@ -38,7 +40,7 @@ public class PerfilJFrame extends javax.swing.JFrame {
         editarjButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        perfisjList1 = new javax.swing.JList<>();
+        perfisjList1 = new javax.swing.JList<Perfil>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Perfil");
@@ -63,6 +65,7 @@ public class PerfilJFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Lista de Perfis");
 
+        perfisjList1.setModel(lista);
         jScrollPane1.setViewportView(perfisjList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,14 +133,18 @@ public class PerfilJFrame extends javax.swing.JFrame {
        dep.log("Colcoa Perfil "+p+ " no painel");  
        perfiljTextField1.setText(p.getNomePerfil());
    }
-   public void inserePerfilLista(Perfil c){
-       dep.log("Insere Perfil "+c+ " na lista do painel");    
+   public void inserePerfilLista(Perfil p){
+       dep.log("Insere Perfil "+p+ " na lista do painel");   
+       lista.addElement(p);
    }
    public Perfil obterPerfilDigitado(){
        String perfil = perfiljTextField1.getText();
        Perfil p = new Perfil(perfil);
        dep.log("Obtem perfil "+p+ " digitado no painel");
        return p;
+   }
+   public void limpaListaPerfis(){
+       lista.clear();       
    }
    public void adicionaInserePerfilListener(ActionListener l){
        inserejButton1.addActionListener(l);
@@ -151,6 +158,7 @@ public class PerfilJFrame extends javax.swing.JFrame {
    public void acidionaRecupararPerfisListener(ActionListener l){
        recuperajButton3.addActionListener(l);
    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editarjButton4;
@@ -160,7 +168,7 @@ public class PerfilJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField perfiljTextField1;
-    private javax.swing.JList<String> perfisjList1;
+    private javax.swing.JList<Perfil> perfisjList1;
     private javax.swing.JButton recuperajButton3;
     private javax.swing.JButton removejButton2;
     // End of variables declaration//GEN-END:variables

@@ -27,6 +27,7 @@ public class InserePerfilListener extends ControlerListener implements ActionLis
         dep.log("Conector swing insere perfil listener disparado");
         Perfil p = gamaView.obterPerfilDigitado();
         gamaControler.inserirPerfil(p);
+        gamaView.inserePerfilLista(p);
     }
     
 }

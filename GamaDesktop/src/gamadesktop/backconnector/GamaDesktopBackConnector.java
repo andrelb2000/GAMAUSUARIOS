@@ -45,7 +45,8 @@ public class GamaDesktopBackConnector extends GamaBackConnector {
         InserePerfilListener    ipl    = new InserePerfilListener(gamaControler,gamaView);
         EditarPerfilListener    epl    = new EditarPerfilListener(gamaControler,gamaView);
         RemovePerfilListener    rpl    = new RemovePerfilListener(gamaControler,gamaView);
-        gamaView.adicionaPerfilListeners(ipl,epl,rpl);
+        RecuperaPerfilListener  rcpl   = new RecuperaPerfilListener(gamaControler,gamaView);
+        gamaView.adicionaPerfilListeners(ipl,epl,rpl,rcpl);
               
         dep.log("disparando view principal de cadastro");
         gamaView.inicializar();

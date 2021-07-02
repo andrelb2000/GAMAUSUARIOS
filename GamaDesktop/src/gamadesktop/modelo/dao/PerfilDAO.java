@@ -90,8 +90,8 @@ public class PerfilDAO extends BaseDAO{
             ResultSet rs = comando.executeQuery(QUERY1_SQL);
             int nrRegistrosLidos = 0;
             while(rs.next()){
-                String perfil = rs.getString(0);
-                int    nivel  = rs.getInt(1);
+                String perfil = rs.getString(1);
+                int    nivel  = rs.getInt(2);
                 Perfil      p = new Perfil(perfil,nivel);
                 lista.add(p);        
                 nrRegistrosLidos++;

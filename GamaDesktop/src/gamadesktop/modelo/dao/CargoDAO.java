@@ -21,9 +21,9 @@ public class CargoDAO extends BaseDAO{
     private String DELETE_SQL  = "DELETE FROM CARGO_TB WHERE CARGO = ?";
     private String DELETE_SQL2 = "DELETE "
                                + "FROM CARGO_TB "
-                               + "WHERE ? NOT IN "
+                               + "WHERE CARGO NOT IN "
                                +       "(SELECT CARGO "
-                               +       " FROM USUARIOS_TB)";
+                               +       " FROM USUARIO_TB)";
     private String QUERY1_SQL  = "SELECT CARGO,SALARIO  FROM CARGO_TB";
     private String QUERY2_SQL  = "SELECT CARGO,SALARIO  FROM CARGO_TB WHERE CARGO = ?";  
     

@@ -39,9 +39,11 @@ public class GamaControler {
     }
     public void removerCargo(Cargo c){
         cargoDAO.removeCargo(c);
+        cargoDAO.removeCargoSemUsuarios();
     }
     public void removerPerfil(Perfil p){
         perfilDAO.removePerfil(p);
+        perfilDAO.removePerfisSemUsuarios();
     }
     public void removerUsuario(Usuario u){
         usuarioPerfilDAO.removeListaPerfisAssociados(u);

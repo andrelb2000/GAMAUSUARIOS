@@ -87,9 +87,9 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         nomejTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         cpfjTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cpfjTextField2.setText("  ");
 
         dataNasjTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        dataNasjTextField3.setText("01/01/2000");
 
         generojTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         generojTextField4.setText("X");
@@ -99,6 +99,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(usuariosjList1);
 
         cargojTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cargojTextField5.setText("CargoX");
 
         perfisjList2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         perfisjList2.setModel(listaPerfisUsuarios);
@@ -114,6 +115,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
         jLabel7.setText("Cargo:");
 
         perfiljTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        perfiljTextField6.setText("Px");
 
         inserejButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         inserejButton1.setText("Insere");
@@ -215,7 +217,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
                                 .addComponent(recuperarUsuariosjButton7)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                                 .addGap(30, 30, 30))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)

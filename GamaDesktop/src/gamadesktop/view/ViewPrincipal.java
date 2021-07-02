@@ -18,7 +18,8 @@ import gamadesktop.backconnector.RemoveCargoListener;
 import gamadesktop.backconnector.RecuperaCargosListener;
 import gamadesktop.backconnector.RemovePerfilListener;
 import gamadesktop.backconnector.RemoveUsuarioListener;
-import gamadesktop.backconnector.RecuperaUsuariosListener;        
+import gamadesktop.backconnector.RecuperaUsuariosListener;  
+import gamadesktop.backconnector.RecuperaPerfilListener;
 import gamadesktop.modelo.to.Cargo;
 import gamadesktop.modelo.to.Perfil;
 import gamadesktop.modelo.to.Usuario;
@@ -67,11 +68,12 @@ public class ViewPrincipal {
         }
         public void adicionaPerfilListeners(InserePerfilListener    ipl,
                                             EditarPerfilListener    epl,        
-                                            RemovePerfilListener    rpl){     
+                                            RemovePerfilListener    rpl,
+                                            RecuperaPerfilListener  rcpl){     
             perfilView.adicionaInserePerfilListener(ipl);
             perfilView.adicionaEditarPerfilListener(epl);
             perfilView.adicionaRemovePerfilListener(rpl);
-            
+            perfilView.acidionaRecupararPerfisListener(rcpl);
         }
         public void inicializar(){
             usuarioView.setVisible(true);
@@ -84,6 +86,12 @@ public class ViewPrincipal {
         public Perfil obterPerfilDigitado(){
             return perfilView.obterPerfilDigitado();
         }    
+        public void inserePerfilLista(Perfil p){
+            perfilView.inserePerfilLista(p);
+        }
+        public void limpaListaPerfis(){
+            perfilView.limpaListaPerfis();
+        }
         
         // Redirecionamento de Views de CARGOS
         public void disparaCargoView(){
