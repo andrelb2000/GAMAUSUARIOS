@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionListener;
 
 
 /**
@@ -96,6 +97,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
 
         usuariosjList1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         usuariosjList1.setModel(listaUsuarios);
+        usuariosjList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(usuariosjList1);
 
         cargojTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -296,6 +298,27 @@ public class UsuarioJFrame extends javax.swing.JFrame {
        generojTextField4.setText(u.getSexoPessoa());
        cargojTextField5.setText(u.getCargoUsuario().getNomeCargo());
    }
+   public void colocaUsuarioSelecionado(){
+
+       Usuario u = usuariosjList1.getSelectedValue();
+       if(u!=null){
+            dep.log("JFrame - Usuario selecionado foi: "+u);   
+            nomejTextField1.setText(u.getNomePessoa());
+            cpfjTextField2.setText(u.getCpfPessoa());
+            dataNasjTextField3.setText(u.getDataNascimento());
+            generojTextField4.setText(u.getSexoPessoa());
+            cargojTextField5.setText(u.getCargoUsuario().getNomeCargo());
+            DataCadastrojLabel10.setText(u.getCadastroUsuario().toString()); 
+            listaPerfisUsuarios.clear();
+            int i=0;
+            Iterator<Perfil> it = u.getPerfisUauario().iterator();
+            while(it.hasNext()){
+                Perfil p = (Perfil) it.next();
+                listaPerfisUsuarios.addElement(p);
+                dep.log("XXXX Adicionando perfil "+ i++ + "do Usuario "+u+ " na lista do painel"); 
+            }  
+       }
+   }
    public void insereNovoUsuarioLista(Usuario u){
        dep.log("Insere Novo Usuario "+u+ " na lista do painel"); 
        listaUsuarios.addElement(u);
@@ -337,6 +360,7 @@ public class UsuarioJFrame extends javax.swing.JFrame {
            u.addPerfil(p);
        }       
        dep.log("Obtem Usuario "+u+ " digitado no painel");
+       
        return u;
    }
    public void insereListaPerfisUsuario(Perfil p){
@@ -375,6 +399,9 @@ public class UsuarioJFrame extends javax.swing.JFrame {
    }
    public void adicionaAbreEditarPerfilListener(ActionListener l){
        abrirEditarPerfisjButton4.addActionListener(l);
+   }
+   public void adicionaSelecionaUsuaarioListener(ListSelectionListener l){
+       usuariosjList1.addListSelectionListener(l);
    }
    
    

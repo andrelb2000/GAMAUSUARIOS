@@ -24,8 +24,8 @@ public class CargoDAO extends BaseDAO{
                                + "WHERE CARGO NOT IN "
                                +       "(SELECT CARGO "
                                +       " FROM USUARIO_TB)";
-    private String QUERY1_SQL  = "SELECT CARGO,SALARIO  FROM CARGO_TB";
-    private String QUERY2_SQL  = "SELECT CARGO,SALARIO  FROM CARGO_TB WHERE CARGO = ?";  
+    private String QUERY1_SQL  = "SELECT CARGO,SALARIO  FROM CARGO_TB ORDER BY CARGO";
+    private String QUERY2_SQL  = "SELECT CARGO,SALARIO  FROM CARGO_TB WHERE CARGO = ? ORDER BY CARGO";  
     
     public void insereCargo(Cargo c){
         try{

@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\GITRepTemp\GAMAUSUARIOS
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Fri Jul 02 16:45:32 BRT 2021: Shutting down Derby engine
+----------------------------------------------------------------
+Fri Jul 02 16:45:32 BRT 2021:
+Encerrando a instância a816c00e-017a-6843-584f-fffff128ff2b
+----------------------------------------------------------------

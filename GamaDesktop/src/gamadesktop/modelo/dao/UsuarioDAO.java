@@ -10,34 +10,40 @@ import gamadesktop.modelo.to.Cargo;
 import gamadesktop.modelo.to.Usuario;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.Iterator;
 
 /**
  *
  * @author andre
  */
 public class UsuarioDAO extends BaseDAO{   
-    private String INSERT_SQL = "INSERT INTO USUARIO_TB(NOME,CPF,NASCIMENTO,SEXO,CARGO) "
-                                     + "VALUES(?,?,?,?,?)";
+    private String INSERT_SQL = "INSERT INTO USUARIO_TB(NOME,CPF,NASCIMENTO,SEXO,CARGO,CADASTRO) "
+                                     + "VALUES(?,?,?,?,?,?)";
+   
     private String UPDATE_SQL = "UPDATE USUARIO_TB "
             + "                         SET CPF = ?, "
             + "                             NASCIMENTO = ?, "
             + "                             SEXO = ?, "
             + "                             CARGO = ?"
                             + " WHERE NOME = ?";
+    
+    
     private String DELETE_SQL = "DELETE FROM USUARIO_TB WHERE NOME = ?";
-    private String QUERY1_SQL = "SELECT NOME,CPF,NASCIMENTO,SEXO,CARGO,CADASTRO FROM USUARIO_TB";
-    private String QUERY2_SQL = "SELECT NOME,CPF,NASCIMENTO,SEXO,CARGO FROM USUARIO_TB WHERE NOME = ?";
+    private String QUERY1_SQL = "SELECT NOME,CPF,NASCIMENTO,SEXO,CARGO,CADASTRO FROM USUARIO_TB ORDER BY NOME";
+    private String QUERY2_SQL = "SELECT NOME,CPF,NASCIMENTO,SEXO,CARGO FROM USUARIO_TB WHERE NOME = ? ORDER BY NOME";
      
     
+
     public void insereUsuario(Usuario u){
         try{
-            dep.log("Usuario DAO inserindo usuario "+u);  
+            dep.log("Usuario COM DATA - DAO inserindo usuario "+u);  
             PreparedStatement comando = conexaoDB.prepareStatement(INSERT_SQL);
             comando.setString(1, u.getNomePessoa());              
             comando.setString(2, u.getCpfPessoa());
             comando.setString(3,u.getDataNascimento());
             comando.setString(4, u.getSexoPessoa());
             comando.setString(5, u.getCargoUsuario().getNomeCargo());
+            comando.setDate(6, new Date(u.getCadastroUsuario().getTime()));
             comando.execute();
             comando.close();
             dep.log("Abrindo DAO externo para inserção da associaco Perfil - Usuario");
@@ -62,7 +68,7 @@ public class UsuarioDAO extends BaseDAO{
     public int recuperaUsuarios(ArrayList<Usuario> lista){
         try{
             dep.log("Usuario DAO recuperando lista de usuarios "); 
-            
+            UsuarioPerfilDAO pud = new UsuarioPerfilDAO();
             Statement comando = conexaoDB.createStatement();
             ResultSet rs = comando.executeQuery(QUERY1_SQL);
             int nrRegistrosLidos = 0;
@@ -74,9 +80,10 @@ public class UsuarioDAO extends BaseDAO{
                 String cargo  = rs.getString(5);
                 Date   cad    = rs.getDate(6);
                 Usuario u = new Usuario(nome, cpf, nasc, sexo, new Cargo(cargo),cad);
+                pud.recuperaPerfisUsuario(u.getPerfisUauario(), u);
                 lista.add(u);        
                 nrRegistrosLidos++;
-            }
+            }     
             dep.log("Enderrando leitura de Usuarios - Total Registros: "+nrRegistrosLidos);
             return nrRegistrosLidos;          
         }catch(Exception e){

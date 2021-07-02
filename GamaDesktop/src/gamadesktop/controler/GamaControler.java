@@ -12,6 +12,7 @@ import gamadesktop.modelo.dao.PerfilDAO;
 import gamadesktop.modelo.dao.UsuarioDAO;
 import gamadesktop.modelo.dao.UsuarioPerfilDAO;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * @author andre
@@ -35,6 +36,9 @@ public class GamaControler {
         usuarioPerfilDAO.removeListaPerfisAssociados(u);
         usuarioPerfilDAO.insereListaPerfisUsuario(u);
         cargoDAO.insereCargo(u.getCargoUsuario());
+        Date d = new Date();
+        dep.log("Teste - Criando objeto data :"+d);
+        u.setCadastroUsuario(d);
         usuarioDAO.insereUsuario(u);
     }
     public void removerCargo(Cargo c){

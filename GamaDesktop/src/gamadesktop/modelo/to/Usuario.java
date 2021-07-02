@@ -55,5 +55,13 @@ public class Usuario extends Pessoa{
              + cargoUsuario + " | "  
              + cadastroUsuario   ) ;
     }
+
+    public Date getCadastroUsuario() {
+        return cadastroUsuario;
+    }
+
+    public void setCadastroUsuario(Date cadastroUsuario) {
+        this.cadastroUsuario = cadastroUsuario;
+    }
     
 }

@@ -27,8 +27,8 @@ public class PerfilDAO extends BaseDAO{
                                + "WHERE a.PERFIL NOT IN "
                                +       "(SELECT b.PERFIL "
                                        + "FROM USUARIO_PERFIL_TB b)";  
-    private String QUERY1_SQL = "SELECT PERFIL,NIVEL  FROM PERFIL_TB";
-    private String QUERY2_SQL = "SELECT PERFIL,NIVEL  FROM PERFIL_TB WHERE PERFIL = ?";
+    private String QUERY1_SQL = "SELECT PERFIL,NIVEL  FROM PERFIL_TB ORDER BY PERFIL";
+    private String QUERY2_SQL = "SELECT PERFIL,NIVEL  FROM PERFIL_TB WHERE PERFIL = ? ORDER BY PERFIL";
         
     public void inserePerfil(Perfil p){
         try{
@@ -51,9 +51,13 @@ public class PerfilDAO extends BaseDAO{
             while(it.hasNext()){
                 Perfil p = (Perfil)it.next();
                 comando.setString(1, p.getNomePerfil());
-                comando.setInt(2, 0);           
-                comando.execute();
-                nrIns++;
+                comando.setInt(2, 0); 
+                try{
+                    comando.execute();
+                    nrIns++;
+                }catch(SQLException e){
+                   dep.log("Excecao Perfil: " + p + " - nao inserido: " + e);
+                }
             }
             comando.close();
             dep.log("Perfis inseridos: " + nrIns);    

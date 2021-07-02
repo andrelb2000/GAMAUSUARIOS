@@ -35,10 +35,14 @@ public class UsuarioPerfilDAO extends BaseDAO{
             while(it.hasNext()){
                 Perfil p = (Perfil)it.next();
                 comando.setString(1, u.getNomePessoa());
-                comando.setString(2, p.getNomePerfil());           
-                comando.execute();
-                dep.log("Inserindo Perfil "+nrIns);
-                nrIns++;
+                comando.setString(2, p.getNomePerfil()); 
+                try{
+                    comando.execute();
+                    dep.log("Inserindo Perfil "+nrIns);
+                    nrIns++;
+                }catch(SQLException e){
+                    dep.log("Integridade no perfil= "+p+ " Erro: "+e);
+                }
             }
             comando.close();
             dep.log("Perfis inseridos para o usuario "+u+" = "+nrIns);
@@ -65,7 +69,7 @@ public class UsuarioPerfilDAO extends BaseDAO{
             ResultSet rs = comando.executeQuery();
             int nrReg = 0;
             while(rs.next()){
-                String perfil = rs.getString(0);
+                String perfil = rs.getString(1);
                 Perfil p = new Perfil(perfil);
                 lista.add(p);
                 nrReg++;

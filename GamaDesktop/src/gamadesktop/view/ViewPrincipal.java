@@ -20,6 +20,7 @@ import gamadesktop.backconnector.RemovePerfilListener;
 import gamadesktop.backconnector.RemoveUsuarioListener;
 import gamadesktop.backconnector.RecuperaUsuariosListener;  
 import gamadesktop.backconnector.RecuperaPerfilListener;
+import gamadesktop.backconnector.SelecionaUsuarioListener;
 import gamadesktop.modelo.to.Cargo;
 import gamadesktop.modelo.to.Perfil;
 import gamadesktop.modelo.to.Usuario;
@@ -46,7 +47,8 @@ public class ViewPrincipal {
                                              AbrirEditarPerfilListener aepl,
                                              RecuperaUsuariosListener rul,
                                              RemoveUsuarioListener rmul,
-                                             InserePerfilUsuarioListener ipul
+                                             InserePerfilUsuarioListener ipul,
+                                             SelecionaUsuarioListener sul
         ){
             usuarioView.adicionaInsereUsuarioListener(iul);
             usuarioView.adicionaAbreEditarCargoListener(aecl);
@@ -54,6 +56,7 @@ public class ViewPrincipal {
             usuarioView.adicionaRecuperaUsuariosListener(rul);                 
             usuarioView.adicionaRemoveUsuariolListener(rmul);
             usuarioView.adiicionaInserePerfilUsuarioListener(ipul);
+            usuarioView.adicionaSelecionaUsuaarioListener(sul);
         }
         public void adicionaCargoListeners( InsereCargoListener      icl,
                                             EditarCargoListener      ecl,
@@ -126,6 +129,9 @@ public class ViewPrincipal {
        }
        public void insereNovoUsuarioLista(Usuario u){
            usuarioView.insereNovoUsuarioLista(u);
+       }
+       public void mostraUsuarioSelecionado(){
+           usuarioView.colocaUsuarioSelecionado();
        }
     
     

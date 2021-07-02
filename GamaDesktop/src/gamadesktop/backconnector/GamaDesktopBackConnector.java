@@ -34,7 +34,8 @@ public class GamaDesktopBackConnector extends GamaBackConnector {
         RecuperaUsuariosListener    rul  = new RecuperaUsuariosListener(gamaControler,gamaView);  
         RemoveUsuarioListener       rmul = new RemoveUsuarioListener(gamaControler,gamaView);
         InserePerfilUsuarioListener ipul = new InserePerfilUsuarioListener(gamaControler,gamaView);
-        gamaView.adicionaListenersUsuario(iul,aecl,aepl,rul,rmul,ipul);    
+        SelecionaUsuarioListener    sul  = new SelecionaUsuarioListener(gamaControler,gamaView);
+        gamaView.adicionaListenersUsuario(iul,aecl,aepl,rul,rmul,ipul,sul);    
         /// Listeners da view de Cargos
         InsereCargoListener      icl   = new InsereCargoListener(gamaControler,gamaView);
         EditarCargoListener      ecl   = new EditarCargoListener(gamaControler,gamaView);
